@@ -1,7 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
-import { getRandomValues } from "crypto";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from "@nestjs/common";
 import { GuestService } from "./guests.service";
-import { brotliDecompress } from "zlib";
 import { CreateGuestDto } from "./dto/create-guest.dto";
 import { UpdateGuestDto } from "./dto/update-guest.dto";
 
@@ -17,7 +15,7 @@ getAll(@Query('limit') limit: string){
 }
 
 @Get(":id")
-getById(@Param('id') id: string){
+getById(@Param('id', ParseIntPipe) id: number){
     return this.guestService.findOne(id)
 }
 
@@ -27,13 +25,13 @@ CreateGuest(@Body() CreateGuestDto: CreateGuestDto){
 }
 
 @Patch(":id")
-updateGuest(@Param("id") id:string, @Body() UpdateGuestDto:UpdateGuestDto){
+updateGuest(@Param("id", ParseIntPipe) id:number, @Body() UpdateGuestDto:UpdateGuestDto){
 
     return this.guestService.update(id, UpdateGuestDto)
 }
 
 @Delete(":id")
-deleteGuest(@Param("id") id: string){
+deleteGuest(@Param("id", ParseIntPipe) id: number){
 return this.guestService.delete(id)
 }
 }

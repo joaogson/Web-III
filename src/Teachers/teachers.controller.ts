@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
 import { TeacherService } from "./teachers.service";
 import { UpdateGuestDto } from "src/guests/dto/update-guest.dto";
 import { CreateGuestDto } from "src/guests/dto/create-guest.dto";
@@ -15,22 +15,22 @@ getAll(){
 }
 
 @Get(":id")
-getById(@Param('id') id:number){
+getById(@Param('id', ParseIntPipe) id:number){
     return this.teacherService.findOne(id)
 }
 
 @Post("/create")
-CreateRoute(@Body() CreateGuestDto: CreateGuestDto){
-    return this.teacherService.
+createTeacher(@Body() CreateGuestDto: CreateGuestDto){
+    return this.teacherService.createTeacher
 }
 
 @Patch(":id")
-updateTeacher(@Param('id') id: number, @Body() UpdateTeacherDto: UpdateGuestDto){
+updateTeacher(@Param('id', ParseIntPipe) id: number, @Body() UpdateTeacherDto: UpdateGuestDto){
     return this.updateTeacher(id, UpdateTeacherDto)
 }
 
 @Delete(":id")
-deleteTeacher(@Param('id') id: number){
+deleteTeacher(@Param('id', ParseIntPipe) id: number){
     return this.teacherService.deleteTeacher(id)
 }
 

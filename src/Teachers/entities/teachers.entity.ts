@@ -4,4 +4,5 @@ export class Teacher{
     name: string
     age: number
     subject: string
+    gender:string
 }

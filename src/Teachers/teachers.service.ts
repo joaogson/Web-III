@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Teacher } from './entities/teachers.entity';
 import { CreateGuestDto } from 'src/guests/dto/create-guest.dto';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
+import { UpdateTeacherDto } from './dto/update-teacher.dto';
 
 @Injectable()
 export class TeacherService {
@@ -12,12 +13,14 @@ export class TeacherService {
       name: 'Joao',
       age: 20,
       subject: 'Math',
+      gender: 'masculino'
     },
     {
       id: 2,
       name: 'Eliza',
       age: 23,
       subject: 'English',
+      gender: 'feminino'
     },
 
 ]
@@ -25,9 +28,9 @@ export class TeacherService {
     return this.listAllTeachers();
   }
 
-  findOne(id){
+  findOne(id: number){
 
-    const teacher = this.teachers.findIndex(teacher=> teacher.id===Number(id))
+    const teacher = this.teachers.findIndex(teacher=> teacher.id===id)
 
 if(teacher) return teacher
 
@@ -48,8 +51,8 @@ createTeacher(createTeacherDto: CreateTeacherDto){
 }
 
 
-updateTeacher(id, UpdateTeacherDto){
-  const teacherIndex = this.teachers.findIndex(teacher=> teacher.id===Number(id))
+updateTeacher(id: number, UpdateTeacherDto: UpdateTeacherDto){
+  const teacherIndex = this.teachers.findIndex(teacher=> teacher.id===id)
 
   if(teacherIndex >= 0){
     const teacherItem = this.teachers[teacherIndex]
@@ -61,8 +64,8 @@ updateTeacher(id, UpdateTeacherDto){
     return "Atualizando Professor"
 }
 
-deleteTeacher(id){
-  const teacherIndex = this.teachers.findIndex(teacher=> teacher.id===Number(id))
+deleteTeacher(id: number){
+  const teacherIndex = this.teachers.findIndex(teacher=> teacher.id===id)
 
   if(teacherIndex < 0){
     throw new HttpException("Esse convidado não existe!", HttpStatus.NOT_FOUND)

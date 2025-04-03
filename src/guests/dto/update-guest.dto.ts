@@ -1,6 +1,8 @@
+import { PartialType } from "@nestjs/mapped-types"
+import { CreateGuestDto } from "./create-guest.dto"
 
 
-export class UpdateGuestDto{
+export class UpdateGuestDto extends PartialType(CreateGuestDto){
     readonly name?: string
     readonly age?: number
 }

@@ -10,21 +10,25 @@ export class GuestService {
       id: 1,
       name: 'Joao',
       age: 20,
+      gender: 'masculino',
     },
     {
       id: 2,
       name: 'Eliza',
       age: 24,
+      gender: 'feminino',
     },
     {
       id: 3,
       name: 'Fulano',
       age: 30,
+      gender: 'masculino',
     },
     {
       id: 4,
       name: 'Ciclano',
       age: 22,
+      gender: 'masculino',
     },
   ];
 
@@ -32,8 +36,8 @@ export class GuestService {
     return this.guests;
   }
 
-  findOne(id: string) {
-    const guest = this.guests.find((guest) => guest.id == Number(id));
+  findOne(id: number) {
+    const guest = this.guests.find((guest) => guest.id == id);
 
   if(guest) return guest
 
@@ -53,8 +57,8 @@ export class GuestService {
     return newGuest;
   }
 
-  update(id: string, UpdateGuestDto: UpdateGuestDto) {
-    const guestIndex = this.guests.findIndex(guest => guest.id == Number(id))
+  update(id: number, UpdateGuestDto: UpdateGuestDto) {
+    const guestIndex = this.guests.findIndex(guest => guest.id == id)
   
 
     if(guestIndex >= 0){
@@ -67,8 +71,8 @@ export class GuestService {
       return "Atualizando Convidado"
   }
 
-  delete(id: string) {
-    const guestIndex = this.guests.findIndex(guest=> guest.id === Number(id))
+  delete(id: number) {
+    const guestIndex = this.guests.findIndex(guest=> guest.id === id)
 
 
     if(guestIndex < 0){
